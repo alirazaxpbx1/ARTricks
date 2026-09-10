@@ -1777,7 +1777,7 @@ setup_telegram_bot() {
     echo -e ""
     echo -e "${CYAN}  ────────────────────────────────────────────────────────────${NC}"
     read -rp "${YELLOW}${BOLD}  ➜ Select Option [1-5]: ${NC}" tb_opt
-        1)
+    1)
             echo -e "${YELLOW}Tip: Bot Token @BotFather se milta hai. Apna Telegram User ID @userinfobot se maloom karein.${NC}"
             read -rp "Telegram Bot Token enter karein: " bot_token
             read -rp "Apna Telegram User ID enter karein (yeh Main Admin banega): " main_id
