@@ -1811,26 +1811,86 @@ uninstall_panel() {
 
 while true; do
     clear
-    CURRENT_DOM=$(get_domain)
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e "${GREEN}              ${PANEL_NAME}                       ${NC}"
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e " Domain Target: ${YELLOW}${CURRENT_DOM}${NC}"
-    echo -e " Custom Path  : ${YELLOW}${CUSTOM_PATH}${NC}"
-    echo -e "${CYAN}----------------------------------------------------${NC}"
-    echo -e " 1) Auto Install System Components"
-    echo -e " 2) Add / Change Domain Name"
-    echo -e " 3) Issue SSL Certificate"
-    echo -e " 4) Manage Accounts (Add/Delete/Renew/Limits)"
-    echo -e " 5) Check Status & Ports"
-    echo -e " 6) Set / Edit SSH Banner"
-    echo -e " 7) Fix SSH WS & WS+SSL Connection"
-    echo -e " 8) Setup / Manage Telegram Bot"
-    echo -e " 9) ${RED}Uninstall Panel (Remove All Components)${NC}"
-    echo -e " 10) Exit Panel"
-    echo -e "${CYAN}====================================================${NC}"
-    read -rp "Select Option [1-10]: " opt
 
+    CURRENT_DOM=$(get_domain)
+
+    echo -e "╔══════════════════════════════════════════════╗"
+    echo -e "║          ✦  A R T R I C K S  ✦             ║"
+    echo -e "║             VPS CONTROL PANEL               ║"
+    echo -e "╠══════════════════════════════════════════════╣"
+    echo -e "║  ● STATUS        ${GREEN}ONLINE${NC}                      ║"
+    echo -e "║  ◈ DOMAIN        ${YELLOW}${CURRENT_DOM:-Not Configured}${NC}              ║"
+    echo -e "║  ◉ PATH          ${YELLOW}${CUSTOM_PATH:-/ARTricks}${NC}                   ║"
+    echo -e "╠══════════════════════════════════════════════╣"
+    echo -e "║                                              ║"
+    echo -e "║  [01] ⚙  SYSTEM INSTALL                     ║"
+    echo -e "║  [02] 🌐  DOMAIN MANAGER                    ║"
+    echo -e "║  [03] 🔐  SSL CERTIFICATE                   ║"
+    echo -e "║  [04] 👤  ACCOUNT MANAGER                   ║"
+    echo -e "║  [05] 📊  STATUS & PORTS                    ║"
+    echo -e "║  [06] 💬  SSH BANNER                        ║"
+    echo -e "║  [07] 🔗  CONNECTION MANAGER                ║"
+    echo -e "║  [08] 🤖  TELEGRAM BOT                      ║"
+    echo -e "║                                              ║"
+    echo -e "║  [09] 🗑  UNINSTALL                          ║"
+    echo -e "║  [00] ←  EXIT                                ║"
+    echo -e "╠══════════════════════════════════════════════╣"
+    echo -e "║  Select an option  ›                         ║"
+    echo -e "╚══════════════════════════════════════════════╝"
+
+    read -rp "  › " opt
+
+    case "$opt" in
+        1|01)
+            auto_install
+            ;;
+
+        2|02)
+            domain_manager
+            ;;
+
+        3|03)
+            issue_ssl
+            ;;
+
+        4|04)
+            account_manager
+            ;;
+
+        5|05)
+            check_status_ports
+            ;;
+
+        6|06)
+            ssh_banner_manager
+            ;;
+
+        7|07)
+            connection_manager
+            ;;
+
+        8|08)
+            telegram_bot_manager
+            ;;
+
+        9|09)
+            uninstall_panel
+            ;;
+
+        0|00|10)
+            echo -e "${GREEN}Exiting panel...${NC}"
+            exit 0
+            ;;
+
+        *)
+            echo -e "${RED}Invalid option! Please select 01-09 or 00.${NC}"
+            sleep 2
+            ;;
+    esac
+
+    echo
+    read -rp "Press Enter to return to the main menu..."
+done
     case $opt in
         1) install_all_components ;;
         2) add_domain_option ;;
