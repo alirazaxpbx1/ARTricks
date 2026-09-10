@@ -1435,21 +1435,36 @@ user_menu() {
     local cur_dom=$(get_domain)
     while true; do
         clear
-        echo -e "${CYAN}====================================================${NC}"
-        echo -e "${YELLOW}       ${PANEL_NAME} - USER MANAGEMENT           ${NC}"
-        echo -e "${CYAN}====================================================${NC}"
-        echo -e " 1) Add New User"
-        echo -e " 2) Delete User"
-        echo -e " 3) Check Connected IPs & Active Online Users"
-        echo -e " 4) Check User Status, Quota & Limits"
-        echo -e " 5) Renew Account Expiry Days"
-        echo -e " 6) Extend / Modify IP Limit (Auto Unlock)"
-        echo -e " 7) Extend / Modify GB Data Quota (Auto Unlock)"
-        echo -e " 8) Back to Main Menu"
-        echo -e "${CYAN}====================================================${NC}"
-        read -rp "Option [1-8]: " u_choice
+        echo -e "${CYAN}${BOLD}"
+echo "╭──────────────────────────────────────────────────────────────╮"
+echo "│                                                              │"
+echo "│                 👥 USER MANAGEMENT                           │"
+echo "│                                                              │"
+echo "│                 ${PANEL_NAME}                                │"
+echo "│                                                              │"
+echo "╰──────────────────────────────────────────────────────────────╯"
+echo -e "${NC}"
 
-        case $u_choice in
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}ACCOUNT MANAGEMENT${NC}                                 ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+echo -e "${CYAN}  │${NC}                                                          ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${GREEN}01${NC}  Add New User                                    ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${RED}02${NC}  Delete User                                     ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${GREEN}03${NC}  Check Connected IPs & Active Online Users       ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${GREEN}04${NC}  Check User Status, Quota & Limits                ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}05${NC}  Renew Account Expiry Days                         ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}06${NC}  Extend / Modify IP Limit (Auto Unlock)           ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}07${NC}  Extend / Modify GB Data Quota (Auto Unlock)      ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}  ${RED}08${NC}  Back to Main Menu                                 ${CYAN}│${NC}"
+echo -e "${CYAN}  │${NC}                                                          ${CYAN}│${NC}"
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+echo -e ""
+echo -e "${CYAN}  ────────────────────────────────────────────────────────────${NC}"
+read -rp "${YELLOW}${BOLD}  ➜ Select Option [1-8]: ${NC}" u_choice
+
+case $u_choice in
             1)
                 read -rp "Username: " username
                 read -rp "Password: " password
@@ -1475,24 +1490,48 @@ user_menu() {
                 echo "GB_LIMIT=$gb_limit" >> "/etc/ARTricks/users/${username}.conf"
                 echo "USED_MB=0.0" >> "/etc/ARTricks/users/${username}.conf"
 
-                echo -e "\n${GREEN}====================================================${NC}"
-                echo -e "${YELLOW}           ACCOUNT CREATED BY ARTricks           ${NC}"
-                echo -e "${GREEN}====================================================${NC}"
-                echo -e " Domain       : ${CYAN}${cur_dom}${NC}"
-                echo -e " Username     : ${CYAN}${username}${NC}"
-                echo -e " Password     : ${CYAN}${password}${NC}"
-                echo -e " Expired On   : ${CYAN}${exp_date}${NC}"
-                echo -e " Max IP Limit : ${CYAN}${ip_limit} Device(s)${NC}"
-                echo -e " Data Limit   : ${CYAN}${gb_limit} GB${NC}"
-                echo -e "${CYAN}----------------------------------------------------${NC}"
-                echo -e " SSH Direct   : ${CYAN}22, 109, 447${NC}"
-                echo -e " SSH WS (HTTP): ${CYAN}80${NC}"
-                echo -e " SSH WS (SSL) : ${CYAN}443${NC}"
-                echo -e "${CYAN}----------------------------------------------------${NC}"
-                echo -e " Payload      :"
-                echo -e "${CYAN}GET ${CUSTOM_PATH} HTTP/1.1[crlf]Host: ${cur_dom}[crlf]Upgrade: websocket[crlf]Connection: Upgrade[crlf][crlf]${NC}"
-                echo -e "${CYAN}----------------------------------------------------${NC}"
-                press_any_key
+                echo -e "\n${GREEN}${BOLD}"
+echo "╭──────────────────────────────────────────────────────────────╮"
+echo "│                                                              │"
+echo "│              ✓  ACCOUNT CREATED SUCCESSFULLY                 │"
+echo "│                     BY ARTricks                              │"
+echo "│                                                              │"
+echo "╰──────────────────────────────────────────────────────────────╯"
+echo -e "${NC}"
+
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}ACCOUNT INFORMATION${NC}                                ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+echo -e "  ${CYAN}│${NC}  Domain       : ${CYAN}${cur_dom}${NC}"
+echo -e "  ${CYAN}│${NC}  Username     : ${CYAN}${username}${NC}"
+echo -e "  ${CYAN}│${NC}  Password     : ${CYAN}${password}${NC}"
+echo -e "  ${CYAN}│${NC}  Expired On   : ${CYAN}${exp_date}${NC}"
+echo -e "  ${CYAN}│${NC}  Max IP Limit : ${CYAN}${ip_limit} Device(s)${NC}"
+echo -e "  ${CYAN}│${NC}  Data Limit   : ${CYAN}${gb_limit} GB${NC}"
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+echo -e ""
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${GREEN}${BOLD}SSH CONNECTION PORTS${NC}                               ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+echo -e "  ${CYAN}│${NC}  SSH Direct    : ${CYAN}22, 109, 447${NC}"
+echo -e "  ${CYAN}│${NC}  SSH WS (HTTP) : ${CYAN}80${NC}"
+echo -e "  ${CYAN}│${NC}  SSH WS (SSL)  : ${CYAN}443${NC}"
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+echo -e ""
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}WEBSOCKET PAYLOAD${NC}                                   ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+echo -e "  ${CYAN}│${NC}  Payload:"
+echo -e "${CYAN}  │${NC}  GET ${CUSTOM_PATH} HTTP/1.1[crlf]Host: ${cur_dom}[crlf]Upgrade: websocket[crlf]Connection: Upgrade[crlf][crlf]"
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+echo -e ""
+echo -e "${GREEN}${BOLD}              ✓ ACCOUNT READY TO USE${NC}"
+echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
+
+press_any_key
                 ;;
             2)
                 echo -e "${CYAN}--- Existing Users ---${NC}"
@@ -1507,7 +1546,7 @@ user_menu() {
                     found=1
                 done
                 [[ $found -eq 0 ]] && echo -e "${YELLOW}  Koi user nahi mila.${NC}"
-                echo -e "${CYAN}----------------------${NC}"
+                echo -e "${GREEN}----------------------${NC}"
                 read -rp "Username to delete: " username
                 if [[ -z "$username" ]]; then
                     echo -e "${RED}[ERROR] Username khaali nahi chhod sakte!${NC}"
@@ -1579,43 +1618,74 @@ status_check() {
     local ws_badge="${RED}[ INACTIVE ]${NC}"
     local ak_badge="${RED}[ INACTIVE ]${NC}"
 
-    [[ "$nginx_status" == "active" ]] && ngx_badge="${GREEN}[ ACTIVE ]${NC}"
+    [[ "$nginx_status" == "active" ]] && ngx_badge="${CYAN}[ ACTIVE ]${NC}"
     [[ "$dropbear_status" == "active" ]] && db_badge="${GREEN}[ ACTIVE ]${NC}"
     [[ "$ws_status" == "active" ]] && ws_badge="${GREEN}[ ACTIVE ]${NC}"
     [[ "$ak_status" == "active" ]] && ak_badge="${GREEN}[ ACTIVE ]${NC}"
 
-    echo -e "${CYAN}====================================================================${NC}"
-    echo -e "${YELLOW}${BOLD}                     SYSTEM & PROTOCOL STATUS                       ${NC}"
-    echo -e "${CYAN}====================================================================${NC}"
-    echo -e " Target Domain : ${BOLD}${current_dom}${NC}"
-    echo -e " Active Path   : ${BOLD}${CUSTOM_PATH}${NC}\n"
+    echo -e "${CYAN}${BOLD}"
+echo "╭──────────────────────────────────────────────────────────────╮"
+echo "│                                                              │"
+echo "│             📊  SYSTEM & PROTOCOL STATUS                     │"
+echo "│                                                              │"
+echo "╰──────────────────────────────────────────────────────────────╯"
+echo -e "${NC}"
 
-    echo -e "${CYAN} SERVICES STATUS${NC}"
-    echo -e "${CYAN} ------------------------------------------------------------------${NC}"
-    printf "   %-28s : %b\n" "Nginx SSL Proxy Engine" "$ngx_badge"
-    printf "   %-28s : %b\n" "Dropbear SSH Core" "$db_badge"
-    printf "   %-28s : %b\n" "Python WebSocket Service" "$ws_badge"
-    printf "   %-28s : %b\n" "Auto-Lock & Bandwidth Daemon" "$ak_badge"
-    echo ""
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}CONNECTION CONFIGURATION${NC}                          ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+echo -e "${CYAN}  │${NC}  Target Domain : ${BOLD}${current_dom}${NC}"
+echo -e "${CYAN}  │${NC}  Active Path   : ${BOLD}${CUSTOM_PATH}${NC}"
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
 
-    echo -e "${CYAN}====================================================================${NC}"
-    press_any_key
+echo -e ""
+echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+echo -e "${CYAN}  │${NC}  ${GREEN}${BOLD}SERVICES STATUS${NC}                                    ${CYAN}│${NC}"
+echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+
+printf "${CYAN}  │${NC}  %-28s : %b\n" "Nginx SSL Proxy Engine" "$ngx_badge"
+printf "${CYAN}  │${NC}  %-28s : %b\n" "Dropbear SSH Core" "$db_badge"
+printf "${CYAN}  │${NC}  %-28s : %b\n" "Python WebSocket Service" "$ws_badge"
+printf "${CYAN}  │${NC}  %-28s : %b\n" "Auto-Lock & Bandwidth Daemon" "$ak_badge"
+
+echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+echo ""
+
+echo -e "${CYAN}  ╰──────────────────────────────────────────────────────────╯${NC}"
+press_any_key
 }
 
 set_banner() {
     clear
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e "${YELLOW}       ${PANEL_NAME} - SET SSH / WS BANNER       ${NC}"
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e "1) Write HTML / Custom Banner"
-    echo -e "2) View Current Banner"
-    echo -e "3) Reset/Clear Banner"
-    echo -e "4) Back"
-    read -rp "Option [1-4]: " b_opt
+
+    echo -e "${CYAN}${BOLD}"
+    echo "╭──────────────────────────────────────────────────────────────╮"
+    echo "│                                                              │"
+    echo "│                 🎨  BANNER MANAGER                           │"
+    echo "│                                                              │"
+    echo "│                 ${PANEL_NAME}                                │"
+    echo "│                                                              │"
+    echo "╰──────────────────────────────────────────────────────────────╯"
+    echo -e "${NC}"
+
+    echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+    echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}SSH / WS BANNER SETTINGS${NC}                         ${CYAN}│${NC}"
+    echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+    echo -e "${CYAN}  │${NC}                                                          ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}01${NC}  Write HTML / Custom Banner                      ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}02${NC}  View Current Banner                              ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${RED}03${NC}  Reset / Clear Banner                             ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${YELLOW}04${NC}  Back                                             ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}                                                          ${CYAN}│${NC}"
+    echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+    echo -e ""
+    echo -e "${CYAN}  ────────────────────────────────────────────────────────────${NC}"
+    read -rp "${YELLOW}${BOLD}  ➜ Select Option [1-4]: ${NC}" b_opt
 
     case $b_opt in
         1)
-            echo -e "${YELLOW}Text banner paste karke [ENTER] dabayein (Ending line par END likhein):${NC}"
+            echo -e "${GREEN}Text banner paste karke [ENTER] dabayein (Ending line par END likhein):${NC}"
             > $BANNER_FILE
             while IFS= read -r line; do
                 [[ $line == "END" ]] && break
@@ -1628,7 +1698,7 @@ set_banner() {
             ;;
         2)
             clear
-            echo -e "${CYAN}--- Current SSH Banner ---${NC}"
+            echo -e "${GREEN}--- Current SSH Banner ---${NC}"
             cat $BANNER_FILE
             press_any_key
             ;;
@@ -1645,9 +1715,31 @@ set_banner() {
 
 fix_websocket() {
     clear
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e "${YELLOW}       FIXING SSH WS & WS+SSL ENGINE               ${NC}"
-    echo -e "${CYAN}====================================================${NC}"
+
+    echo -e "${CYAN}${BOLD}"
+    echo "╭──────────────────────────────────────────────────────────────╮"
+    echo "│                                                              │"
+    echo "│              🔧  ARTricks SYSTEM REPAIR                     │"
+    echo "│                                                              │"
+    echo "│              SSH WS & WS+SSL ENGINE                          │"
+    echo "│                                                              │"
+    echo "╰──────────────────────────────────────────────────────────────╯"
+    echo -e "${NC}"
+
+    echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+    echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}REPAIR PROCESS${NC}                                      ${CYAN}│${NC}"
+    echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}●${NC}  Checking WebSocket port                          ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}●${NC}  Repairing Dropbear core                          ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}●${NC}  Restarting WebSocket proxy                      ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}●${NC}  Installing Python tracker                       ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}●${NC}  Applying Nginx configuration                    ${CYAN}│${NC}"
+    echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+    echo -e ""
+    echo -e "${YELLOW}${BOLD}  ⚙  Repairing SSH WS & WS+SSL Engine...${NC}"
+    echo -e "${CYAN}  ────────────────────────────────────────────────────────────${NC}"
+    echo -e ""
 
     fuser -k 109/tcp 2>/dev/null
     fix_dropbear_core
@@ -1661,22 +1753,34 @@ fix_websocket() {
 
 setup_telegram_bot() {
     clear
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e "${YELLOW}       ${PANEL_NAME} - TELEGRAM BOT SETUP          ${NC}"
-    echo -e "${CYAN}====================================================${NC}"
-    echo -e " 1) Install / Configure Bot (Token + Super Admin ID)"
-    echo -e " 2) Restart Bot Service"
-    echo -e " 3) Stop Bot Service"
-    echo -e " 4) View Bot Status"
-    echo -e " 5) Back"
-    echo -e "${CYAN}====================================================${NC}"
-    read -rp "Option [1-5]: " tb_opt
 
-    case $tb_opt in
+    echo -e "${CYAN}${BOLD}"
+    echo "╭──────────────────────────────────────────────────────────────╮"
+    echo "│                                                              │"
+    echo "│              🤖 TELEGRAM BOT CENTER                          │"
+    echo "│                                                              │"
+    echo "│              ${PANEL_NAME}                                   │"
+    echo "│                                                              │"
+    echo "╰──────────────────────────────────────────────────────────────╯"
+    echo -e "${NC}"
+
+    echo -e "${CYAN}  ┌──────────────────────────────────────────────────────────┐${NC}"
+    echo -e "${CYAN}  │${NC}  ${YELLOW}${BOLD}BOT MANAGEMENT${NC}                                      ${CYAN}│${NC}"
+    echo -e "${CYAN}  ├──────────────────────────────────────────────────────────┤${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}01${NC}  Install / Configure Bot ${DIM}(Token + Super Admin ID)${NC} ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}02${NC}  Restart Bot Service                              ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}03${NC}  Stop Bot Service                                 ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${GREEN}04${NC}  View Bot Status                                 ${CYAN}│${NC}"
+    echo -e "${CYAN}  │${NC}  ${RED}05${NC}  Back                                             ${CYAN}│${NC}"
+    echo -e "${CYAN}  └──────────────────────────────────────────────────────────┘${NC}"
+
+    echo -e ""
+    echo -e "${CYAN}  ────────────────────────────────────────────────────────────${NC}"
+    read -rp "${YELLOW}${BOLD}  ➜ Select Option [1-5]: ${NC}" tb_opt
         1)
             echo -e "${YELLOW}Tip: Bot Token @BotFather se milta hai. Apna Telegram User ID @userinfobot se maloom karein.${NC}"
             read -rp "Telegram Bot Token enter karein: " bot_token
-            read -rp "Apna Telegram User ID enter karein (yeh Super Admin banega): " super_id
+            read -rp "Apna Telegram User ID enter karein (yeh Main Admin banega): " main_id
 
             if [[ -z "$bot_token" || -z "$super_id" ]]; then
                 echo -e "${RED}[ERROR] Token aur ID dono zaroori hain!${NC}"
@@ -1816,8 +1920,8 @@ uninstall_panel() {
 
     echo -e "${BLUE}[6/6] Removing menu command...${NC}"
     echo -e "${GREEN}[SUCCESS] Uninstall complete.${NC}"
-    echo -e "${YELLOW}[NOTE] Nginx, Dropbear, Certbot packages khud remove nahi kiye gaye.${NC}"
-    echo -e "${YELLOW}       Poori tarah hataane ke liye manually chalayein: apt remove --purge nginx dropbear certbot${NC}"
+    echo -e "${RED}[NOTE] Nginx, Dropbear, Certbot packages khud remove nahi kiye gaye.${NC}"
+    echo -e "${RED}       Poori tarah hataane ke liye manually chalayein: apt remove --purge nginx dropbear certbot${NC}"
     echo -e "\n${YELLOW}Panel band ho raha hai...${NC}"
     sleep 2
     rm -f /usr/local/bin/menu /usr/bin/menu
