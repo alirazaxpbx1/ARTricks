@@ -1744,25 +1744,40 @@ CFG_EOF
 
 uninstall_panel() {
     clear
-    echo -e "${RED}${BOLD}====================================================================${NC}"
-    echo -e "${RED}${BOLD}               UNINSTALL ARTricks VPN PANEL                      ${NC}"
-    echo -e "${RED}${BOLD}====================================================================${NC}"
-    echo -e "${YELLOW}Yeh operation ye sab permanently remove kar dega:${NC}"
-    echo -e "  - WebSocket Proxy & Auto-Kill systemd services"
-    echo -e "  - Telegram Bot service aur config"
-    echo -e "  - Nginx VPN reverse-proxy config"
-    echo -e "  - Saare panel-created SSH users aur unki config files"
-    echo -e "  - Domain config aur SSH banner reset"
-    echo -e "  - Menu command khud (/usr/local/bin/menu, /usr/bin/menu)"
-    echo -e "${RED}Yeh action UNDO nahi ho sakta!${NC}\n"
-    read -rp "Confirm karne ke liye 'YES' likhein (case-sensitive): " confirm
+
+    echo -e "${RED}${BOLD}"
+    echo "╭──────────────────────────────────────────────────────────────╮"
+    echo "│                                                              │"
+    echo "│              ⚠  ARTricks VPN PANEL  ⚠                       │"
+    echo "│                    UNINSTALL PANEL                           │"
+    echo "│                                                              │"
+    echo "╰──────────────────────────────────────────────────────────────╯"
+    echo -e "${NC}"
+
+    echo -e "${YELLOW}${BOLD}                    ⚠ WARNING ⚠${NC}"
+    echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
+    echo -e ""
+    echo -e "${WHITE}  Yeh operation ye sab permanently remove kar dega:${NC}"
+    echo -e ""
+    echo -e "${RED}  ✘${NC} WebSocket Proxy & Auto-Kill systemd services"
+    echo -e "${RED}  ✘${NC} Telegram Bot service aur config"
+    echo -e "${RED}  ✘${NC} Nginx VPN reverse-proxy config"
+    echo -e "${RED}  ✘${NC} Saare panel-created SSH users aur unki config files"
+    echo -e "${RED}  ✘${NC} Domain config aur SSH banner reset"
+    echo -e "${RED}  ✘${NC} Menu command khud (/usr/local/bin/menu, /usr/bin/menu)"
+    echo -e ""
+    echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
+    echo -e "${RED}${BOLD}              ⚠ YEH ACTION UNDO NAHI HO SAKTA ⚠${NC}"
+    echo -e "${CYAN}──────────────────────────────────────────────────────────────${NC}"
+    echo -e ""
+
+    read -rp "${YELLOW}${BOLD}  ➜ Confirm karne ke liye 'YES' likhein: ${NC}" confirm
 
     if [[ "$confirm" != "YES" ]]; then
-        echo -e "${YELLOW}Uninstall cancel kar diya gaya.${NC}"
+        echo -e "${YELLOW}  ✘ Uninstall cancel kar diya gaya.${NC}"
         press_any_key
         return
     fi
-
     echo -e "\n${BLUE}[1/6] Stopping & disabling services...${NC}"
     systemctl stop ws-proxy 2>/dev/null
     systemctl stop autokill 2>/dev/null
